@@ -33,7 +33,7 @@ FileType = options.gtf
 Directory = options.directory
 
 CNCIPATH = os.path.split(os.path.realpath(__file__))[0]
-print CNCIPATH
+print(CNCIPATH)
 ################################################################
 if ClassModel == 've':
     MatrixPath = CNCIPATH + "/CNCI_Parameters/CNCI_matrix"
@@ -181,11 +181,11 @@ def PringResult(result,svmfinal):
         start_position = out_label_arr[2]
         stop_position = out_label_arr[3]
         value = out_label_arr[4]
-	out_value = value[0:5]
-	out_value = string.atof(out_value)
+        out_value = value[0:5]
+        out_value = string.atof(out_value)
         T_length = out_label_arr[5]
-	if out_value == 0:
-	    out_value = out_value + 0.001
+        if out_value == 0:
+            out_value = out_value + 0.001
         #if out_value == 0:
         #    while True:
         #        out_value = random.randint(0.1,1)
@@ -204,27 +204,27 @@ def PringResult(result,svmfinal):
                     OutFileResult.write(temp_out_str)
                 else:
                     out_value = -1 * out_value
-		    temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
+                    temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
                     temp_out_str = temp_out_str + '\n'
                     OutFileResult.write(temp_out_str)
             else:
-	        temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
+                temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
                 temp_out_str = temp_out_str + '\n'
                 OutFileResult.write(temp_out_str)
         if property == 'coding':
             if out_value <= 0:
                 if out_value <= - 1:
                     out_value = -1 / out_value
-		    temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
+                    temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
                     temp_out_str = temp_out_str + '\n'
                     OutFileResult.write(temp_out_str)
                 else:
                     out_value = -1 * out_value
-		    temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
+                    temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
                     temp_out_str = temp_out_str + '\n'
                     OutFileResult.write(temp_out_str)
             else:
-	        temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
+                temp_out_str = str(Tabel_label)+'\t'+str(property)+'\t'+str(out_value)+'\t'+str(start_position)+'\t'+str(stop_position)+'\t'+str(T_length)
                 temp_out_str = temp_out_str + '\n'
                 OutFileResult.write(temp_out_str)
 def TwoLineFasta (Seq_Array):
@@ -376,7 +376,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
 
                 Start = 0
                 End = 0
-	        Max = 0
+                Max = 0
                 Position = ''
                 for r in range(len(CodonScore)):
                     sum = 0
@@ -585,8 +585,8 @@ if Parallel == 1:
     #subprocess.call('rm '+SvmFile+' ', shell=True)
     #subprocess.call('rm '+svm_tmp+' ', shell=True)
     #subprocess.call('rm '+outPutFileName+' ', shell=True)
-    print 'CNCI classification were completely done!'
-    print "%f second for" % (time.time() - Compute_time) + ' ' + str(inFileLength) + ' ' + "transcript's computation."
+    print('CNCI classification were completely done!')
+    print("%f second for" % (time.time() - Compute_time) + ' ' + str(inFileLength) + ' ' + "transcript's computation.")
     shutil.rmtree(Temp_Dir,True)
 if Parallel > 1:
     Proc_Thread = []
@@ -655,6 +655,6 @@ if Parallel > 1:
     #subprocess.call('rm '+inGtfFiles+' ', shell=True)
     #subprocess.call('rm '+fastaFiles+' ', shell=True)
 ##############################################################################################################
-    print 'CNCI classification were completely done!'
-    print "%f second for" % (time.time() - Compute_time) + ' ' + str(inFileLength) + ' ' + "transcript's computation."
+    print('CNCI classification were completely done!')
+    print("%f second for" % (time.time() - Compute_time) + ' ' + str(inFileLength) + ' ' + "transcript's computation.")
     shutil.rmtree(Temp_Dir,True)
