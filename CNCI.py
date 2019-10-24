@@ -182,7 +182,7 @@ def PringResult(result,svmfinal):
         stop_position = out_label_arr[3]
         value = out_label_arr[4]
         out_value = value[0:5]
-        out_value = string.atof(out_value)
+        out_value = float(out_value)
         T_length = out_label_arr[5]
         if out_value == 0:
             out_value = out_value + 0.001
@@ -194,7 +194,7 @@ def PringResult(result,svmfinal):
         #    Out_Hash[out_value] = 1
         #    out_value = out_value * -1
         if property == 'noncoding':
-            out_value = string.atof(0.64) * out_value
+            out_value = float(0.64) * out_value
             out_value = 0.64 * out_value
             if out_value > 0:
                 if out_value > 1:
@@ -370,7 +370,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
                         temp1 = SingleArray[n]+SingleArray[n+1]
                         temple1 = re.compile('[atcg]{6}')
                         if temple1.match(temp1):
-                            num = string.atof(num) + string.atof(hash_matrix[temp1])
+                            num = float(num) + float(hash_matrix[temp1])
                     num = num / WindowStep
                     CodonScore.append(num)
 
@@ -382,7 +382,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
                     sum = 0
                     CodonLength = len(CodonScore)
                     for e in range(r,CodonLength):
-                        sum = sum + string.atof(CodonScore[e])
+                        sum = sum + round(CodonScore[e], 3)
                         if sum > Max:
                             Start = r
                             End = e
@@ -403,7 +403,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
                     temp1 = OutParray[n]+OutParray[n+1]
                     temple = re.compile('[atcg]{6}')
                     if temple.match(temp1):
-                        Onum = string.atof(Onum) + string.atof(hash_matrix[temp1])
+                        Onum = float(Onum) + float(hash_matrix[temp1])
                 score_array.append(Onum)
                 length_store_array.append(max_length)
             else:
@@ -412,7 +412,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
                     temp1 = TempArray[n]+TempArray[n+1]
                     temple2 = re.compile('[atcg{6}]')
                     if temple2.match(temp1):
-                        num = string.atof(num) + string.atof(hash_matrix[temp1])
+                        num = float(num) + float(hash_matrix[temp1])
                 OutStr = ' '.join(TempArray)
                 Pos.append('Full Length')
                 max_Value.append(num)
@@ -436,7 +436,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
             temp_trip = o_arr[j]+o_arr[j+1]
             temple3 = re.compile('[atcg]{6}')
             if temple3.match(temp_trip):
-                M_score = string.atof(M_score) + string.atof(hash_matrix[temp_trip])
+                M_score = float(M_score) + float(hash_matrix[temp_trip])
         SequenceLen = SequenceLen + 2
         M_score = M_score / SequenceLen  ### M_score
         MLCDS_str = ''.join(o_arr)
@@ -459,7 +459,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
                 temp2 = MLCDS_array[j]+MLCDS_array[j+1]
                 temple4 = re.compile('[atcg]{6}')
                 if temple4.match(temp2):
-                    other_num = string.atof(other_num) + string.atof(hash_matrix[temp2])
+                    other_num = float(other_num) + float(hash_matrix[temp2])
             MLCDS_array_Len = MLCDS_array_Len + 2
             other_num = other_num / MLCDS_array_Len
             other_CDS_array.append(other_num)
@@ -473,8 +473,8 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
         M_length = length_store_array[orf_index]
         length_total_score = 0
         for p in range(len(length_store_array)):
-            length_total_score = string.atof(length_total_score) + string.atof(length_store_array[p])
-        length_precent = string.atof(M_length) / string.atof(length_total_score) ## length_precent
+            length_total_score = float(length_total_score) + float(length_store_array[p])
+        length_precent = float(M_length) / float(length_total_score) ## length_precent
 ########################################################################################3
         detil_other_length_array = []
         for p in range(len(length_store_array)):
@@ -501,7 +501,7 @@ def mainProcess(input,codonArr,hash_matrix,output,number):
 #############################################################################################
         C_num1 = 0
         for i in range(len(Coding_Array_one)):
-            C_num1 = string.atof(C_num1) + string.atof(Coding_Array_one[i])
+            C_num1 = float(C_num1) + float(Coding_Array_one[i])
         if C_num1 == 0:
             C_num1 = 1
         for i in range(len(Coding_Array_one)):
@@ -559,7 +559,7 @@ for i in range(len(Label_Array)):
     TOT_STRING.append(tmp_label)
     TOT_STRING.append(Temp_Seq)
 ############################################################
-if Parallel == 1:
+if int(Parallel) == 1:
     (Result_Pro,Result_Detil) = mainProcess(inFilesArr,Alphabet,Matrix_hash,outPutFileName,1,)
     Temp_Dir = outPutFileName + '_Temp_Dir'
     subprocess.call('mkdir '+Temp_Dir+'' , shell=True)
@@ -588,7 +588,7 @@ if Parallel == 1:
     print('CNCI classification were completely done!')
     print("%f second for" % (time.time() - Compute_time) + ' ' + str(inFileLength) + ' ' + "transcript's computation.")
     shutil.rmtree(Temp_Dir,True)
-if Parallel > 1:
+if int(Parallel) > 1:
     Proc_Thread = []
     Temp_Dir = outPutFileName + '_Tmp_Dir'
     Out_Dir = outPutFileName
